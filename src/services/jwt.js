@@ -22,5 +22,5 @@ exports.createRefreshToken = (user) => {
 };
 
 exports.decodedToken = (token) => {
-    return jwt.decode(token, SECRET_KEY);
+    return jwt.decode(token, SECRET_KEY, true);
 };
