@@ -1,7 +1,21 @@
-const API_VERSION = "v1";
-const IP_SERVER = "localhost";
-const PORT_DB = 27017;
-const TWILIO_ACCOUNT_SID = "AC00389706ec29fde1d5549ea364096979";
-const TWILIO_AUTH_TOKEN = "87f2ed396962046a12e7559fcb2a2669";
+require("dotenv").config();
 
-module.exports = { API_VERSION, IP_SERVER, PORT_DB, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN};
+const API_VERSION = "v1";
+const SECRET_KEY = process.env.SECRET_KEY;
+const PORT = process.env.PORT;
+
+const DB_NAME = process.env.DB_NAME;
+const DB_USER = process.env.DB_USER;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_SERVER_IP = process.env.DB_SERVER_IP;
+const DB_PORT = process.env.DB_PORT;
+
+const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
+
+const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
+const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
+
+module.exports = { API_VERSION, SECRET_KEY, PORT, 
+    DB_NAME, DB_USER, DB_PASSWORD, DB_SERVER_IP, 
+    DB_PORT, SENDGRID_API_KEY, TWILIO_ACCOUNT_SID, 
+    TWILIO_AUTH_TOKEN };

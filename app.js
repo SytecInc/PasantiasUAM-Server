@@ -5,10 +5,9 @@ const cors = require("cors");
 const app = express()
 const { API_VERSION } = require("./config");
 
-
-const companyRoutes = require("./src/routes/company");
-const userRoutes = require("./src/routes/user");
-const authRoutes = require("./src/routes/auth");
+const authRoutes = require("./src/routes/auth.routes");
+const userRoutes = require("./src/routes/user.routes");
+const companyRoutes = require("./src/routes/company.routes");
 
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());

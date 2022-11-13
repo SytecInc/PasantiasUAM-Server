@@ -1,9 +1,6 @@
 const sgMail = require('@sendgrid/mail');
 const { Await } = require('react-router-dom');
-const  SENDGRID_API_KEY = "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"
-
-
-
+const SENDGRID_API_KEY = require('../../../config').SENDGRID_API_KEY;
 
 sgMail.setApiKey(SENDGRID_API_KEY);
 
