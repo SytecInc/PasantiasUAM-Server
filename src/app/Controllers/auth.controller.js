@@ -6,7 +6,6 @@ const User = require("../Models/user.model");
 const signIn = (req, res) => {
     const email = req.body.email.toLowerCase();
     const password = req.body.password;
-
     User.findOne({ email }, (err, userStored) => {
         if (err) {
             res.status(500).send({ message: "Server cannot find user. Reason: "+err });
