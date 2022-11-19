@@ -8,16 +8,16 @@ const signIn = (req, res) => {
     const password = req.body.password;
     User.findOne({ email }, (err, userStored) => {
         if (err) {
-            res.status(500).send({ message: "Server cannot find user. Reason: "+err });
+            res.status(500).send({ error: "Server cannot find user. Reason: "+err });
         } else {
             bcrypt.compare(password, userStored.password, (err, check) => {
                 if (err) {
-                    res.status(500).send({ message: "Server cannot perform password check. Reason: "+err });
+                    res.status(500).send({ error: "Server cannot perform password check. Reason: "+err });
                 } else if (!check) {
-                    res.status(406).send({ message: "Invalid password." });
+                    res.status(406).send({ error: "Invalid password." });
                 } else {
                     if (!userStored.active) {
-                        res.status(200).send({ code:200, message: "Inactive user." });
+                        res.status(200).send({ code:200, error: "Inactive user." });
                     } else {
                         res.status(200).send({
                             data: {
@@ -46,12 +46,12 @@ const refreshAccessToken = (req, res) => {
     const { id } = jwt.decodedToken(refreshToken);
 
     tokenExpired
-        ? res.status(404).send({ message: "El token ha caducado" })
+        ? res.status(404).send({ error: "El token ha caducado" })
         :User.findOne({ _id: id }, (err, userStored) =>
             err
-                ? res.status(500).send({ message: "Error del servidor" })
+                ? res.status(500).send({ error: "Error del servidor" })
                 : !userStored
-                ? res.status(400).send({ message: "Usuario no encontrado" })
+                ? res.status(400).send({ error: "Usuario no encontrado" })
                 : res
                     .status(200)
                     .send({

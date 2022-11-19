@@ -5,7 +5,7 @@ const { companyResource, companyCollection } = require("../Resources/company.res
 const index = (req, res) => {
     Company.find({}, (err, companies) => {
         if (err) {
-            res.status(422).send({ message: "Cannot find companies. Reason: "+err });
+            res.status(422).send({ error: "Cannot find companies. Reason: "+err });
         } else {
             res.status(200).send(companyCollection(companies));
         }
@@ -16,7 +16,7 @@ const show = (req, res) => {
     const { id } = req.params;
     Company.findById(id, (err, company) => {
         if (err) {
-            res.status(422).send({ message: "Cannot find Company." });
+            res.status(422).send({ error: "Cannot find Company." });
         } else {
             res.status(200).send(companyResource(company));
         }
@@ -35,7 +35,7 @@ const store = (req, res) => {
 
     company.save(function (err, companieStored) {
         if (err) {
-            res.status(500).send({ message: err });
+            res.status(500).send({ error: err });
         } else {
             res.status(201).send(companyResource(companieStored));
         }
@@ -53,7 +53,7 @@ const update = (req, res) => {
     
     Company.findByIdAndUpdate(id, dict, {new: true}, (err, company) => {
         if (err) {
-            res.status(422).send({ message: "Cannot update Company. Reason: "+err });
+            res.status(422).send({ error: "Cannot update Company. Reason: "+err });
         } else {
             res.status(200).send(companyResource(company));
         }
@@ -64,9 +64,9 @@ const destroy = (req, res) => {
     const { id } = req.params;
     Company.findByIdAndDelete(id, (err, company) => {
         if (err) {
-            res.status(422).send({ message: "Cannot delete Company. Reason: "+err });
+            res.status(422).send({ error: "Cannot delete Company. Reason: "+err });
         } else if (company === null) {
-            res.status(404).send({ message: "Cannot find Company." });
+            res.status(404).send({ error: "Cannot find Company." });
         } else {
             res.status(200).send(companyResource(company));
         }

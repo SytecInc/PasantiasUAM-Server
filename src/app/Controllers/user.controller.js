@@ -5,7 +5,7 @@ const { userResource, userCollection } = require("../Resources/user.resource");
 const index = (req, res) => {
     User.find({}, (err, users) => {
         if (err) {
-            res.status(422).send({ message: "Cannot find users. Reason: "+err });
+            res.status(422).send({ error: "Cannot find users. Reason: "+err });
         } else {
             res.status(200).send(userCollection(users));
         }
@@ -16,7 +16,7 @@ const show = (req, res) => {
     const { id } = req.params;
     User.findById(id, (err, user) => {
         if (err) {
-            res.status(422).send({ message: "Cannot find user." });
+            res.status(422).send({ error: "Cannot find user." });
         } else {
             res.status(200).send(userResource(user));
         }
@@ -38,12 +38,12 @@ const store = (req, res) => {
         if (err) {
             res
             .status(500)
-            .send({ message: "Cannot encrypt password. Reason: "+err });
+            .send({ error: "Cannot encrypt password. Reason: "+err });
         } else {
             user.password = hash;
             user.save(function (err, userStored) {
                 if (err) {
-                    res.status(500).send({ message: err });
+                    res.status(500).send({ error: err });
                 } else {
                     res.status(201).send(userResource(userStored));
                 }
@@ -67,7 +67,7 @@ const update = (req, res) => {
     
     User.findByIdAndUpdate(id, dict, {new: true}, (err, user) => {
         if (err) {
-            res.status(422).send({ message: "Cannot update user. Reason: "+err });
+            res.status(422).send({ error: "Cannot update user. Reason: "+err });
         } else {
             res.status(200).send(userResource(user));
         }
@@ -78,9 +78,9 @@ const destroy = (req, res) => {
     const { id } = req.params;
     User.findByIdAndDelete(id, (err, user) => {
         if (err) {
-            res.status(422).send({ message: "Cannot delete user. Reason: "+err });
+            res.status(422).send({ error: "Cannot delete user. Reason: "+err });
         } else if (user === null) {
-            res.status(404).send({ message: "Cannot find user." });
+            res.status(404).send({ error: "Cannot find user." });
         } else {
             res.status(200).send(userResource(user));
         }
