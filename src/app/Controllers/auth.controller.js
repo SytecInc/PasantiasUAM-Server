@@ -41,7 +41,6 @@ const checkIfTokenExpired = (token) => {
 const refreshAccessToken = (req, res) => {
     const { refreshToken } = req.body;
     const tokenExpired = checkIfTokenExpired(refreshToken);
-    console.log(tokenExpired);
 
     const { id } = jwt.decodedToken(refreshToken);
 
@@ -61,4 +60,7 @@ const refreshAccessToken = (req, res) => {
         );
 };
 
-module.exports = {signIn, refreshAccessToken};
+module.exports = {
+    signIn,
+    refreshAccessToken
+};
