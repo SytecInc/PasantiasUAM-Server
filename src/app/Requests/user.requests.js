@@ -36,6 +36,13 @@ exports.validateUserStoreRequest = [
             }
         });
     }),
+    check("email").custom((value, {req, loc, path}) => {
+        if (/autonoma.edu.co/.test(req.body.email)) {
+            return true;
+        } else {
+            throw new Error("email field is not an autonoma.edu.co domain")
+        }
+    }),
 
     check("phone", "phone field is required").exists(),
     check("phone", "phone field must be a string").isString(),
@@ -95,6 +102,13 @@ exports.validateUserUpdateRequest = [
                 return Promise.reject('email already in use');
             }
         });
+    }).optional(),
+    check("email").custom((value, {req, loc, path}) => {
+        if (/autonoma.edu.co/.test(req.body.email)) {
+            return true;
+        } else {
+            throw new Error("email field is not an autonoma.edu.co domain")
+        }
     }).optional(),
 
     check("phone", "phone field must be a string").isString().optional(),
