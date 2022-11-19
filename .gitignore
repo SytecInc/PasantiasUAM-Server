@@ -245,4 +245,7 @@ $RECYCLE.BIN/
 # and uncomment the following lines
 # .pnp.*
 
+uploads/avatar/*
+!uploads/avatar/.avatar
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,linux,macos,yarn,node,react
