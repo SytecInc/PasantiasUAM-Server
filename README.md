@@ -21,7 +21,7 @@ Create database `use pasantias_db`
 
 ### Create user
 
-Create user `db.createUser( { user: "manager_pas", pwd: passwordPrompt(), roles: [ { role: "dbOwner", db: "pasantias_db" }] }`
+Create user `db.createUser( { user: "manager_pas", pwd: passwordPrompt(), roles: [ { role: "dbOwner", db: "pasantias_db" }] })`
 
 ### Finish .env configuration
 
