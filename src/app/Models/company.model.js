@@ -1,19 +1,18 @@
-const user = {
-    name: {
+const mongoose = require("mongoose");
+const CompanySchema = mongoose.Schema({
+    nit: {
+        type: String,
+        unique: true,
+    },
+    company_name: {
         type: String,
         require: true,
-        min: 3,
-    },
-    lastname: {
-        type: String,
-        require: true,
-        min: 3,
-    },
+    }, 
     email: {
         type: String,
         unique: true,
     },
-    password: {
+    contact_phone: {
         type: String,
         require: true,
     },
@@ -21,4 +20,6 @@ const user = {
         type: Boolean,
         require: true,
     },
-};
+});
+
+module.exports = mongoose.model("Company", CompanySchema);
