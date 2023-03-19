@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Profile = require("./profile.model");
 
 const roles = {
 	admin: "admin",
@@ -6,25 +7,9 @@ const roles = {
 }
 
 const UserSchema = mongoose.Schema({
-    name: {
-        type: String,
-        require: true,
-    },
-    lastname: {
-        type: String,
-        require: true,
-    },
-    govId: {
-        type: String,
-        require: true,
-    },
     email: {
         type: String,
         unique: true,
-    },
-    phone: {
-        type: String,
-        require: true,
     },
     password: {
         type: String,
@@ -38,11 +23,11 @@ const UserSchema = mongoose.Schema({
         type: Boolean,
         require: true,
     },
-    avatar: {
-        type: String,
+    profile: {
+        type: Profile.schema,
         require: false,
     },
-});
+}, {timestamps: true});
 
 module.exports = mongoose.model("User", UserSchema);
 module.exports.roles = roles;

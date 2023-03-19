@@ -1,7 +1,7 @@
 const { check, validationResult } = require("express-validator");
-const User = require("../Models/user.model");
+const User = require("../models/user.model");
 
-exports.validateUserSignInRequest = [
+const validateUserSignIn = [
 
     check("email", "email field is required").exists(),
     check("email", "email field must be a string").isString(),
@@ -29,3 +29,7 @@ exports.validateUserSignInRequest = [
     }
     
 ];
+
+module.exports = {
+    validateUserSignIn
+};
