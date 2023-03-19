@@ -1,9 +1,13 @@
 const express = require("express");
-const AuthController = require("../app/Controllers/auth.controller");
-const { validateUserSignInRequest } = require("../app/Requests/auth.requests");
+const {
+    signIn,
+} = require("../controllers/auth.controller");
+const { 
+    validateUserSignIn,
+} = require("../validators/auth.validator");
+
 const api = express.Router();
 
-api.post("/login", validateUserSignInRequest, AuthController.signIn);
-api.post("/users/refresh-token", AuthController.refreshAccessToken);
+api.post("/login", validateUserSignIn, signIn);
 
 module.exports = api;

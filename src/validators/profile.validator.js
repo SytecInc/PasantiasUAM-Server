@@ -1,7 +1,7 @@
 const { check, validationResult } = require("express-validator");
 const User = require("../Models/user.model");
 
-exports.validateUserStoreRequest = [
+const validateProfileStore = [
     check("name", "name field is required").exists(),
     check("name", "name field must be a string").isString(),
     check("name", "name field cannot be empty").not().isEmpty(),
@@ -72,7 +72,7 @@ exports.validateUserStoreRequest = [
     
 ];
 
-exports.validateUserUpdateRequest = [
+const validateProfileUpdate = [
     check("name", "name field must be a string").isString().optional(),
     check("name", "name field cannot be empty").not().isEmpty().optional(),
 
@@ -140,5 +140,9 @@ exports.validateUserUpdateRequest = [
         }
         next();
     }
-    
 ];
+
+module.exports = {
+    validateProfileStore,
+    validateProfileUpdate
+};

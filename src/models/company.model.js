@@ -20,6 +20,6 @@ const CompanySchema = mongoose.Schema({
         type: Boolean,
         require: true,
     },
-});
+}, {timestamps: true});
 
 module.exports = mongoose.model("Company", CompanySchema);

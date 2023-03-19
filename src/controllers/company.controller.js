@@ -1,13 +1,12 @@
-const bcrypt = require("bcrypt-nodejs");
-const Company = require("../Models/company.model");
-const { companyResource, companyCollection } = require("../Resources/company.resource");
+const Company = require("../models/company.model");
+const { companyResource } = require("../resources/company.resource");
 
 const index = (req, res) => {
     Company.find({}, (err, companies) => {
         if (err) {
             res.status(422).send({ error: "Cannot find companies. Reason: "+err });
         } else {
-            res.status(200).send(companyCollection(companies));
+            res.status(200).send(companyResource(companies));
         }
     });
 }
