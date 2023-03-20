@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Profile = require("./profile.model");
 const Student = require("./student.model");
-const Meeting = require("./meeting.model");
 
 const roles = {
 	admin: "admin",
