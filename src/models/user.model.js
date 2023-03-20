@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const Profile = require("./profile.model");
+const Student = require("./student.model");
 
 const roles = {
 	admin: "admin",
@@ -6,25 +8,9 @@ const roles = {
 }
 
 const UserSchema = mongoose.Schema({
-    name: {
-        type: String,
-        require: true,
-    },
-    lastname: {
-        type: String,
-        require: true,
-    },
-    govId: {
-        type: String,
-        require: true,
-    },
     email: {
         type: String,
         unique: true,
-    },
-    phone: {
-        type: String,
-        require: true,
     },
     password: {
         type: String,
@@ -32,17 +18,26 @@ const UserSchema = mongoose.Schema({
     },
     role: {
         type: String,
+        enum: Object.values(roles),
         require: true,
     },
     active: {
         type: Boolean,
         require: true,
     },
-    avatar: {
-        type: String,
+    profile: {
+        type: Profile.schema,
         require: false,
     },
-});
+    student: {
+        type: Student.schema,
+        require: false,
+    },
+    meetings: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Meeting'
+    }]
+}, {timestamps: true});
 
 module.exports = mongoose.model("User", UserSchema);
 module.exports.roles = roles;
