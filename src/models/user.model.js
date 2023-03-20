@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Profile = require("./profile.model");
+const Student = require("./student.model");
+const Meeting = require("./meeting.model");
 
 const roles = {
 	admin: "admin",
@@ -17,6 +19,7 @@ const UserSchema = mongoose.Schema({
     },
     role: {
         type: String,
+        enum: Object.values(roles),
         require: true,
     },
     active: {
@@ -27,6 +30,14 @@ const UserSchema = mongoose.Schema({
         type: Profile.schema,
         require: false,
     },
+    student: {
+        type: Student.schema,
+        require: false,
+    },
+    meetings: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Meeting'
+    }]
 }, {timestamps: true});
 
 module.exports = mongoose.model("User", UserSchema);
